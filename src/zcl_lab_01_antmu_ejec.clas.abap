@@ -1,14 +1,14 @@
-class ZCL_LAB_01_ANTMU_EJEC definition
-  public
-  final
-  create public .
-
-public section.
-protected section.
-private section.
+CLASS zcl_lab_01_antmu_ejec DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+* aaaaaa
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_LAB_01_ANTMU_EJEC IMPLEMENTATION.
+CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 ENDCLASS.
