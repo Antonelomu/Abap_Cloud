@@ -87,7 +87,7 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     DATA: lv_amarillo TYPE c LENGTH 8,
           lv_rojo     TYPE c LENGTH '4',
           lv_verde    TYPE c LENGTH '5',
-          lv_gris     type c leNGTH '4'.
+          lv_gris     TYPE c LENGTH '4'.
 
     CREATE OBJECT: lo_elem1.
 
@@ -116,6 +116,74 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     fecha = lo_student->birth_date.
 
     out->write( fecha ).
+
+*Ejercicio constructor
+
+*contructor estático
+
+    out->write( zcl_lab_10_antmu_constructor=>log ).
+    DATA(log1) = NEW zcl_lab_10_antmu_constructor( iv_log = 'Log1' ).
+
+    out->write( zcl_lab_10_antmu_constructor=>log ).
+    DATA log2 TYPE REF TO zcl_lab_10_antmu_constructor.
+    CREATE OBJECT log2
+      EXPORTING
+        iv_log = 'Log2'.
+
+    out->write( zcl_lab_10_antmu_constructor=>log  ).
+
+* Ejercicio 1 - Herencia
+
+    DATA(lo_linux) = NEW zcl_lab_12_antmu_linux(  ).
+
+    lo_linux->get_architecture( IMPORTING ev_architecture = DATA(lv_architecture) ).
+
+    out->write( lv_architecture  ).
+
+* Ejercicio 2 - Constructores con herencia.
+
+    DATA: lv_view_type TYPE string VALUE 'VIEW_1',
+          lv_box       TYPE string VALUE 'BOX_1'.
+
+    DATA(lo_view) = NEW zcl_lab_13_antmu_view( iv_view_type = 'VIEW1' ).
+    DATA(lo_grid) = NEW zcl_lab_14_antmu_grid(
+      iv_view_type = lv_view_type
+      iv_box       = lv_box ).
+
+    out->write( |{ lv_view_type }-{ lv_box }| ).
+
+* Ejercicio 3 - Redifinición de métodos
+
+    DATA: it_flight TYPE STANDARD TABLE OF /dmo/flight.
+    DATA: ls_flight TYPE /dmo/flight,
+          lt_flight TYPE /dmo/flight.
+
+    DATA(lo_price1) = NEW zcl_lab_15_antmu_price(  ).
+    DATA(lo_price2) = NEW zcl_lab_16_antmu_discount(  ).
+    DATA(lo_price3) = NEW zcl_lab_17_antmu_sup_discount(  ).
+
+    SELECT * FROM /dmo/flight INTO TABLE @it_flight.
+
+    READ TABLE it_flight INTO ls_flight INDEX 1.
+
+    IF sy-subrc = 0.
+      lo_price1->add_price( ls_flight ).
+      READ TABLE lo_price1->mt_flights INTO lt_flight INDEX 1.
+      IF sy-subrc = 0.
+        out->write( lt_flight-price ).
+      ENDIF.
+      lo_price2->add_price( ls_flight ).
+      READ TABLE lo_price2->mt_flights INTO lt_flight INDEX 1.
+      IF sy-subrc = 0.
+        out->write( lt_flight-price ).
+      ENDIF.
+      lo_price3->add_price( ls_flight ).
+      READ TABLE lo_price3->mt_flights INTO lt_flight INDEX 1.
+      IF sy-subrc = 0.
+        out->write( lt_flight-price ).
+      ENDIF.
+    ENDIF.
+
 
   ENDMETHOD.
 
