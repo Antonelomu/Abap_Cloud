@@ -202,7 +202,7 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
       CATCH cx_sy_move_cast_error.
         out->write( 'Casting error' ).
 *        RETURN.
-" Quito el RETURN para poder seguir ejecutando.
+        " Quito el RETURN para poder seguir ejecutando.
 
     ENDTRY.
 
@@ -234,10 +234,87 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     lo_capital2->get_company_capital(
       RECEIVING
-        rv_company = data(lv_company_capital) ).
+        rv_company = DATA(lv_company_capital) ).
 
     out->write( lv_company_capital ).
 
+* Ejerccio 2 - Llamada a métodos de interfaz.
+
+    DATA(lo_flights) = NEW zcl_lab_26_antmu_flights(  ).
+
+    lo_flights->zif_lab_01_antmu_flight~set_conn_id( iv_conn_id = 'Vuelo 1' ).
+    out->write( lo_flights->zif_lab_01_antmu_flight~get_conn_id(  ) ).
+
+* Ejerccio 3 - Implementación de multiples interfaces.
+
+*    DATA(lo_customer) = NEW zcl_lab_26_antmu_flights(  ).
+*
+*    DATA: lwa_customer TYPE lo_customer->zif_lab_02_antmu_customer~ty_cust_address.
+*
+*    lo_customer->zif_lab_02_antmu_customer~get_customer(
+*      EXPORTING
+*        iv_customer = '000043'
+*      RECEIVING
+*        rv_customer = lwa_customer
+*    ).
+*
+*    out->write( lwa_customer ).
+
+* Ejerccio 4 - Interfaces anidadas.
+
+*    DATA(lo_airport) = NEW zcl_lab_26_antmu_flights(  ).
+*
+*    DATA: lwa_airport TYPE /dmo/airport.
+*
+*    lo_airport->zif_lab_03_antmu_airports~get_airports(
+*      EXPORTING
+*        iv_airport_id = 'FRA'
+*      RECEIVING
+*        rv_airport_id = lwa_airport
+*    ).
+*
+*    out->write( lwa_airport ).
+
+* Ejerccio 5 - Alias.
+
+    DATA(lo_customer) = NEW zcl_lab_26_antmu_flights(  ).
+
+    DATA: lwa_customer TYPE lo_customer->als_ty_cust_address. " zif_lab_02_antmu_customer~ty_cust_address.
+
+    lo_customer->als_get_customer(                            " zif_lab_02_antmu_customer~get_customer(
+      EXPORTING
+        iv_customer = '000043'
+      RECEIVING
+        rv_customer = lwa_customer
+    ).
+
+    out->write( lwa_customer ).
+
+    DATA(lo_airport) = NEW zcl_lab_26_antmu_flights(  ).
+
+    DATA: lwa_airport TYPE /dmo/airport.
+
+    lo_airport->als_get_airports(                              " zif_lab_03_antmu_airports~get_airports(
+      EXPORTING
+        iv_airport_id = 'FRA'
+      RECEIVING
+        rv_airport_id = lwa_airport
+    ).
+
+    out->write( lwa_airport ).
+
+
+* Ejerccio 6 - Clase abstracta.
+
+    DATA(lo_logistic) = NEW zcl_lab_28_antmu_logistic(  ).
+
+    DATA: lv_merchandise    TYPE string,
+          lv_production_lin TYPE string,
+          lv_input_products TYPE string.
+
+    out->write( lo_logistic->get_merchandise_output(  ) ).
+    out->write( lo_logistic->get_production_line(  ) ).
+    out->write( lo_logistic->get_input_products( ) ).
 
   ENDMETHOD.
 
