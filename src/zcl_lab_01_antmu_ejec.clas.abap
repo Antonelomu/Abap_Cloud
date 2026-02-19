@@ -184,6 +184,60 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
       ENDIF.
     ENDIF.
 
+* Ejercicio 4-5 - Narrowing Cast
+
+    DATA(lo_animal) = NEW zcl_lab_18_antmu_animal( ).
+    DATA(lo_lion)   = NEW zcl_lab_19_antmu_lion( ).
+
+    out->write( lo_animal->get_walk( ) ).
+    out->write( lo_lion->get_walk( ) ).
+
+*    lo_animal = lo_lion. " Narrowing cast(UP Cast)
+
+    out->write( lo_animal->get_walk( ) ).
+    out->write( lo_lion->get_walk( ) ).
+
+    TRY.
+        lo_lion ?= lo_animal. " Widening Cast(Down Cast)
+      CATCH cx_sy_move_cast_error.
+        out->write( 'Casting error' ).
+*        RETURN.
+" Quito el RETURN para poder seguir ejecutando.
+
+    ENDTRY.
+
+    out->write( lo_animal->get_walk( ) ).
+    out->write( lo_lion->get_walk( ) ).
+
+* Ejercicio 8 - encapsulación de instancias
+
+    DATA(go_student) = NEW zcl_lab_21_antmu_classroom(  ).
+* Si en la clase ZLC_LAB_21_ANTMU_CLASSROOM
+*   create public     -  NO da error
+*   create protected  -  SI da error al instanciar objeto.
+*   create private    -  SI da error al instanciar objeto.
+
+* Ejercicio 9 - Clase amiga.
+
+    DATA(lo_capital) = NEW zcl_lab_24_antmu_parner(  ).
+
+    lo_capital->get_company_capital(
+      RECEIVING
+        rv_company = DATA(lv_capital)
+    ).
+
+    out->write( lv_capital ).
+
+* Ejercicio 10 Herencia con clase amiga
+
+    DATA(lo_capital2) = NEW zcl_lab_25_antmu_colaborator(  ).
+
+    lo_capital2->get_company_capital(
+      RECEIVING
+        rv_company = data(lv_company_capital) ).
+
+    out->write( lv_company_capital ).
+
 
   ENDMETHOD.
 

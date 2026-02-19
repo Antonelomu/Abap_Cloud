@@ -1,0 +1,16 @@
+CLASS zcl_lab_23_antmu_company DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC
+  GLOBAL FRIENDS zcl_lab_24_antmu_parner.
+
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+    DATA capital TYPE string VALUE '1000'.
+ENDCLASS.
+
+
+
+CLASS zcl_lab_23_antmu_company IMPLEMENTATION.
+ENDCLASS.
