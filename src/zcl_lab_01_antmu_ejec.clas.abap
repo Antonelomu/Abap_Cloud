@@ -316,6 +316,24 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     out->write( lo_logistic->get_production_line(  ) ).
     out->write( lo_logistic->get_input_products( ) ).
 
+* Polimorfismo, asociación y composición.
+
+* Ejercicio 1 Polimorfismo con clases.
+
+    DATA: gt_Organization TYPE STANDARD TABLE OF REF TO zcl_lab_29_antmu_organization,
+          go_Organization TYPE REF TO zcl_lab_29_antmu_organization,
+          go_germany      TYPE REF TO zcl_lab_30_antmu_org_germany,
+          go_france       TYPE REF TO zcl_lab_31_antmu_org_france.
+
+    go_germany = NEW #( ).
+    APPEND go_germany TO gt_organization.
+    go_france = NEW #(  ).
+    APPEND go_france TO gt_organization.
+
+    LOOP AT gt_organization INTO go_Organization.
+      out->write( go_organization->get_location(  ) ).
+    ENDLOOP.
+
   ENDMETHOD.
 
 ENDCLASS.

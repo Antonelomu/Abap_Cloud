@@ -13,7 +13,7 @@ ENDCLASS.
 
 CLASS zcl_lab_31_antmu_org_france IMPLEMENTATION.
   METHOD get_location.
-    rv_location = 'France'.
+    rv_location = 'Location France'.
   ENDMETHOD.
 
 ENDCLASS.
