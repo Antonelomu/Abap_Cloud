@@ -334,6 +334,22 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
       out->write( go_organization->get_location(  ) ).
     ENDLOOP.
 
+* Ejercicio 2 Polimorfismo con interfase.
+
+    DATA: gt_employee_count  TYPE TABLE OF REF TO zif_lab_04_antmu_employee,
+          go_employee_count  TYPE REF TO zif_lab_04_antmu_employee,
+          go_internal_empl   TYPE REF TO zcl_lab_32_antmu_internal_empl,
+          go_expatriate_empl TYPE REF TO zcl_lab_33_antmu_expatriate_em.
+
+    go_internal_empl = NEW #( ).
+    APPEND go_internal_empl TO gt_employee_count.
+    go_expatriate_empl = NEW #(  ).
+    APPEND go_expatriate_empl TO gt_employee_count.
+
+    LOOP AT gt_employee_count INTO go_employee_count.
+      out->write( go_employee_count->get_employees_count(  ) ).
+    ENDLOOP.
+
   ENDMETHOD.
 
 ENDCLASS.
