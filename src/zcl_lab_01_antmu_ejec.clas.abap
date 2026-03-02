@@ -355,6 +355,11 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     DATA(lo_student1) = NEW zcl_lab_34_antmu_student(  ).
     DATA(lo_name) = NEW zcl_lab_35_antmu_college(  ).
 
+    lo_student1->set_name( 'Antonio' ).
+*   lo_name->enroll_student( lo_student1 )->
+*   lo_name->enroll_name(  )->
+
+
   ENDMETHOD.
 
 ENDCLASS.
