@@ -350,6 +350,11 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
       out->write( go_employee_count->get_employees_count(  ) ).
     ENDLOOP.
 
+* Ejercicio 3 Asociación.
+
+    DATA(lo_student1) = NEW zcl_lab_34_antmu_student(  ).
+    DATA(lo_name) = NEW zcl_lab_35_antmu_college(  ).
+
   ENDMETHOD.
 
 ENDCLASS.
