@@ -352,12 +352,17 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
 * Ejercicio 3 Asociación.
 
-    DATA(lo_student1) = NEW zcl_lab_34_antmu_student(  ).
-    DATA(lo_name) = NEW zcl_lab_35_antmu_college(  ).
+    DATA(lo_student1) = NEW zcl_lab_34_antmu_student( ).
+    DATA(lo_college) = NEW zcl_lab_35_antmu_college(  ).
 
     lo_student1->set_name( 'Antonio' ).
-*   lo_name->enroll_student( lo_student1 )->
-*   lo_name->enroll_name(  )->
+    lo_student1->get_name(
+      RECEIVING
+        rv_name = DATA(lv_name) ).
+
+    lo_college->enroll_student( iv_enroll_student = lo_student1 ).
+
+    out->write( lo_college->student->get_name( ) ).
 
 
   ENDMETHOD.
