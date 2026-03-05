@@ -1,14 +1,14 @@
-class ZCL_LAB_36_ANTMU_PHONE definition
-  public
-  final
-  create public .
+CLASS zcl_lab_36_antmu_phone DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_LAB_36_ANTMU_PHONE IMPLEMENTATION.
+CLASS zcl_lab_36_antmu_phone IMPLEMENTATION.
 ENDCLASS.

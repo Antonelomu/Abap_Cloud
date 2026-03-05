@@ -1,14 +1,15 @@
-class ZCL_LAB_37_ANTMU_SCREEN definition
-  public
-  final
-  create public .
+CLASS zcl_lab_37_antmu_screen DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+  data: screen_type type string.
 ENDCLASS.
 
 
 
-CLASS ZCL_LAB_37_ANTMU_SCREEN IMPLEMENTATION.
+CLASS zcl_lab_37_antmu_screen IMPLEMENTATION.
 ENDCLASS.
