@@ -386,7 +386,6 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     lo_price_2->price = 500.
 
     out->write( lo_price_1->price ).
-    out->write( lo_price_2->price ).
 
   ENDMETHOD.
 
