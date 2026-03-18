@@ -365,6 +365,29 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     out->write( lo_college->student->get_name( ) ).
 
 
+* Ejercicio 4 Composición.
+
+    DATA(lo_screen) = NEW zcl_lab_37_antmu_screen(  ).
+    DATA(lo_phone)  = NEW zcl_lab_36_antmu_phone( lo_screen ).
+
+    lo_screen->set_screen( iv_screen = 'La pantalla es un modelo grande'  ).
+    lo_screen->get_screen( RECEIVING rv_screen = DATA(lv_screen) ).
+
+    out->write( lo_phone->screen->get_screen(  ) ).
+
+* Ejercicio 5 Múltiples referencias apuntando al mismo objeto
+
+    DATA(lo_price_1) = NEW  zcl_lab_38_antmu_prod_price(  ).
+    DATA(lo_price_2) = NEW zcl_lab_38_antmu_prod_price(  ).
+
+
+    lo_price_2 = lo_price_1.
+
+    lo_price_2->price = 500.
+
+    out->write( lo_price_1->price ).
+    out->write( lo_price_2->price ).
+
   ENDMETHOD.
 
 ENDCLASS.

@@ -1,0 +1,15 @@
+CLASS zcl_lab_38_antmu_prod_price DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    DATA: price TYPE i.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_lab_38_antmu_prod_price IMPLEMENTATION.
+ENDCLASS.
