@@ -387,6 +387,18 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     out->write( lo_price_1->price ).
 
+* Ejercicio 6 Crear instancias de tipos distintos
+
+
+    DATA: lo_budget TYPE REF TO zcl_lab_39_ANTMU_budget.
+
+
+    lo_budget = NEW zcl_lab_40_ANTMU_actual_budget( ).
+
+    zcl_lab_40_ANTMU_actual_budget=>lv_text = 'El presupuesto es de 1000 €'.
+
+    out->write( lo_budget->get_budget( ) ).
+
   ENDMETHOD.
 
 ENDCLASS.
