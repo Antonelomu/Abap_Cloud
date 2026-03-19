@@ -399,6 +399,23 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     out->write( lo_budget->get_budget( ) ).
 
+* Ejercicio 7 Asignar instancias a la clase genérica Object
+
+    DATA: LR_OBJECt TYPE REF TO object.
+    DATA(go_object) = NEW zcl_lab_41_antmu_organization( ).
+
+
+
+
+
+*    DATA lv_headquarters TYPE string.
+*    DATA lv_cat TYPE string.
+*
+*    CALL METHOD lr_object->(lv_headquarters) RECEIVING rv_headquarters = lv_cat.
+*
+*    out->write( lv_cat ).
+
+
   ENDMETHOD.
 
 ENDCLASS.
