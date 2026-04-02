@@ -417,9 +417,6 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     out->write( lv_headquarters ).
 
-
-
-
   ENDMETHOD.
 
 ENDCLASS.
