@@ -417,6 +417,24 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     out->write( lv_headquarters ).
 
+* Ejercicio 1 Eventos Definición - Levantamiento objeto - clase receptora
+
+    DATA: lo_screen_2   TYPE REF TO zcl_lab_42_antmu_screen,
+          lo_navigation TYPE REF TO zcl_lab_43_antmu_navigation.
+
+    lo_screen_2 = NEW zcl_lab_42_antmu_screen( ).
+    lo_navigation = NEW zcl_lab_43_antmu_navigation(  ).
+
+   lo_screen_2->element_selected(
+      iv_element_ph = 130
+      iv_element_pv = 50 ).
+
+    SET HANDLER lo_navigation->on_touch_screen FOR lo_screen_2.
+
+
+
+    out->write( lo_screen_2 ).
+
   ENDMETHOD.
 
 ENDCLASS.

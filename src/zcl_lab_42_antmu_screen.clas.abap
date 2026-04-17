@@ -1,14 +1,32 @@
-class ZCL_LAB_42_ANTMU_SCREEN definition
-  public
-  final
-  create public .
+CLASS zcl_lab_42_antmu_screen DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+    EVENTS touch_screen EXPORTING VALUE(ev_poshor) TYPE i
+                                  VALUE(ev_posver) TYPE i.
+
+    METHODS element_selected IMPORTING iv_element_ph TYPE i
+                                       iv_element_pv TYPE i.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_LAB_42_ANTMU_SCREEN IMPLEMENTATION.
+CLASS zcl_lab_42_antmu_screen IMPLEMENTATION.
+
+  METHOD element_selected.
+
+    me->element_selected(
+      iv_element_ph = 1
+      iv_element_pv = 2
+    ).
+    RAISE EVENT touch_screen
+      EXPORTING
+        ev_poshor =  iv_element_ph
+        ev_posver = iv_element_pv.
+  ENDMETHOD.
+
 ENDCLASS.
