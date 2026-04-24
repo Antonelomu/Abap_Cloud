@@ -1,3 +1,4 @@
+
 CLASS zcl_lab_01_antmu_ejec DEFINITION
 * Pruebas Logali - Antonio Muñoz Moreno
   PUBLIC
@@ -422,18 +423,34 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     DATA: lo_screen_2   TYPE REF TO zcl_lab_42_antmu_screen,
           lo_navigation TYPE REF TO zcl_lab_43_antmu_navigation.
 
-    lo_screen_2 = NEW zcl_lab_42_antmu_screen( ).
-    lo_navigation = NEW zcl_lab_43_antmu_navigation(  ).
+    lo_screen_2 = NEW #( iv_screen_type = '42 Pulgadas' ).
 
-   lo_screen_2->element_selected(
-      iv_element_ph = 130
-      iv_element_pv = 50 ).
+    lo_navigation = NEW #( ).
 
     SET HANDLER lo_navigation->on_touch_screen FOR lo_screen_2.
 
+    lo_screen_2->element_selected(
+        iv_pos_x = 130
+        iv_pos_y = 50 ).
+
+    out->write( lo_navigation->lv_log ).
+
+* Ejercicio 5 Definir eventos en las interfases
+
+    DATA go_operat_sistem  TYPE REF TO zcl_lab_44_antmu_operat_sistem.
+    DATA go_chrome         TYPE REF TO zcl_lab_45_antmu_chrome.
+
+    go_operat_sistem =  NEW #( ).
+    go_chrome = NEW #( ).
+
+    SET HANDLER go_chrome->on_close_windows FOR go_operat_sistem.
+
+    out->write( go_operat_sistem->mouse_movement(  ) ).
+
+    out->write( go_operat_sistem->log ).
 
 
-    out->write( lo_screen_2 ).
+
 
   ENDMETHOD.
 

@@ -9,8 +9,9 @@ CLASS zcl_lab_43_antmu_navigation DEFINITION
 
     METHODS on_touch_screen FOR EVENT touch_screen OF zcl_lab_42_antmu_screen
       IMPORTING
-         ev_poshor
-         ev_posver.
+        iv_pos_x
+        iv_pos_y
+        sender.
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -20,7 +21,8 @@ ENDCLASS.
 CLASS zcl_lab_43_antmu_navigation IMPLEMENTATION.
   METHOD on_touch_screen.
   clear: me->lv_log.
-  me->lv_log = |Línea horizontal: { ev_poshor } Línea vertical: { ev_posver }|.
+    LV_LOG = |Pantalla: { sender->screen_type } |
+          && |Línea horizontal: { iv_pos_x } Línea vertical: { iv_pos_y }|.
   ENDMETHOD.
 
 ENDCLASS.

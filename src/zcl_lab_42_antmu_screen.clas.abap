@@ -4,13 +4,21 @@ CLASS zcl_lab_42_antmu_screen DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-    EVENTS touch_screen EXPORTING VALUE(ev_poshor) TYPE i
-                                  VALUE(ev_posver) TYPE i.
 
-    METHODS element_selected IMPORTING iv_element_ph TYPE i
-                                       iv_element_pv TYPE i.
+    DATA screen_type TYPE string.
+
+
+    EVENTS touch_screen EXPORTING VALUE(iv_pos_x) TYPE i
+                                  VALUE(iv_pos_y) TYPE i.
+
+    METHODS constructor IMPORTING iv_screen_type TYPE string.
+
+    METHODS element_selected IMPORTING iv_pos_x TYPE i
+                                       iv_pos_y TYPE i.
   PROTECTED SECTION.
   PRIVATE SECTION.
+    DATA: LV_element_ph TYPE i,
+          LV_element_pv TYPE i.
 ENDCLASS.
 
 
@@ -19,14 +27,14 @@ CLASS zcl_lab_42_antmu_screen IMPLEMENTATION.
 
   METHOD element_selected.
 
-    me->element_selected(
-      iv_element_ph = 1
-      iv_element_pv = 2
-    ).
     RAISE EVENT touch_screen
       EXPORTING
-        ev_poshor =  iv_element_ph
-        ev_posver = iv_element_pv.
+        iv_pos_x = iv_pos_x
+        iv_pos_y = iv_pos_y.
+  ENDMETHOD.
+
+  METHOD constructor.
+    screen_type = iv_screen_type.
   ENDMETHOD.
 
 ENDCLASS.
