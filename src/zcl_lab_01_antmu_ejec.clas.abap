@@ -427,7 +427,7 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     lo_navigation = NEW #( ).
 
-    SET HANDLER lo_navigation->on_touch_screen FOR lo_screen_2.
+    SET HANDLER lo_navigation->on_touch_screen FOR lo_screen_2 ACTIVATION abap_true.
 
     lo_screen_2->element_selected(
         iv_pos_x = 130
@@ -437,19 +437,37 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
 * Ejercicio 5 Definir eventos en las interfases
 
-    DATA go_operat_sistem  TYPE REF TO zcl_lab_44_antmu_operat_sistem.
-    DATA go_chrome         TYPE REF TO zcl_lab_45_antmu_chrome.
+    DATA(go_operat_sistem)  = NEW zcl_lab_44_antmu_operat_sistem(  ).
+    DATA(go_chrome) = NEW zcl_lab_45_antmu_chrome( ).
 
-    go_operat_sistem =  NEW #( ).
-    go_chrome = NEW #( ).
 
-    SET HANDLER go_chrome->on_close_windows FOR go_operat_sistem.
+*    SET HANDLER go_chrome->on_close_windows FOR go_operat_sistem ACTIVATION abap_true.
+*
+*    go_operat_sistem->mouse_movement( ).
+*
+*
+*    out->write( go_operat_sistem->log ).
+*
+*    out->write( go_chrome->log ).
 
-    out->write( go_operat_sistem->mouse_movement(  ) ).
+* Ejercicio 6 Desactivar el objeto manejador.
 
+    SET HANDLER go_chrome->on_close_windows FOR go_operat_sistem ACTIVATION abap_false.
+
+    go_operat_sistem->mouse_movement( ).
+*
     out->write( go_operat_sistem->log ).
+*
+    out->write( go_chrome->log ).
 
+* Ejercicio 7  Eventos estáticos
 
+*    data(go_operator) = new zcl_lab_46_antmu_mob_operator(  ).
+    SET HANDLER zcl_lab_47_antmu_custo_service=>on_new_call.
+
+    data: lv_telf1 type string vALUE '123456'.
+    zcl_lab_46_antmu_mob_operator=>assign_call( lv_telf1  ).
+    out->write( zcl_lab_47_antmu_custo_service=>lv_call ).
 
 
   ENDMETHOD.
