@@ -4,23 +4,26 @@ CLASS zcl_lab_48_antmu_admin_dep DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-     EVENTS payroll_paid EXPORTING VALUE(employee_id) TYPE string.
 
+    EVENTS payroll_paid EXPORTING VALUE(ev_employee_id) TYPE string.
 
     METHODS constructor IMPORTING iv_employee_id TYPE string.
 
     METHODS notify_employee.
+
+
+
   PROTECTED SECTION.
   PRIVATE SECTION.
-
-    DATA: employee_id TYPE string,
-          log         TYPE string.
+    DATA: employee_id TYPE string.
+    CLASS-DATA: log TYPE string.
 ENDCLASS.
 
 
 
 CLASS zcl_lab_48_antmu_admin_dep IMPLEMENTATION.
   METHOD constructor.
+*    SET HANDLER notify_employee for all INSTANCES.
     me->employee_id = iv_employee_id.
   ENDMETHOD.
 
@@ -30,7 +33,7 @@ CLASS zcl_lab_48_antmu_admin_dep IMPLEMENTATION.
 
     RAISE EVENT payroll_paid
       EXPORTING
-        employee_id = me->employee_id.
+        ev_employee_id = me->employee_id.
 
   ENDMETHOD.
 ENDCLASS.

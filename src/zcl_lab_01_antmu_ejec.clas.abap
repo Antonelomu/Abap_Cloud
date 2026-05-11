@@ -469,7 +469,48 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     zcl_lab_46_antmu_mob_operator=>assign_call( lv_telf1  ).
     out->write( zcl_lab_47_antmu_custo_service=>lv_call ).
 
+* Ejercicio 8  All Instance
 
+
+data: lv_log type string.
+
+data(go_admin1) = new zcl_lab_48_antmu_admin_dep( lv_log ).
+data(go_admin2) = new zcl_lab_48_antmu_admin_dep( lv_log ).
+data(go_admin3) = new zcl_lab_48_antmu_admin_dep( lv_log ).
+
+data(go_emp) = new zcl_lab_49_antmu_employee(   ).
+
+
+set hanDLER go_emp->on_payroll_paid for go_admin1.
+set hanDLER go_emp->on_payroll_paid for go_admin2.
+set hanDLER go_emp->on_payroll_paid for go_admin3.
+
+go_admin1->employee_id = 'aaa'.
+* lv_log = 'EMP001'.
+" Crear instancias administrativas
+*CREATE OBJECT lo_admin1
+*  EXPORTING
+*    iv_employee_id = lv_log.
+
+*set hanDLER lo_emp->on_payroll_paid for lo_admin1.
+*lo_admin1->notify_employee( ).
+*out->write( lv_log ).
+* lv_log = 'EMP002'.
+*CREATE OBJECT lo_admin2
+*  EXPORTING
+*    iv_employee_id = lv_log.
+*
+*set hanDLER lo_emp->on_payroll_paid for lo_admin2.
+*lo_admin2->notify_employee( ).
+*out->write( lv_log ).
+*
+* lv_log = 'EMP003'.
+*CREATE OBJECT lo_admin3
+*  EXPORTING
+*    iv_employee_id = lv_log.
+*set hanDLER lo_emp->on_payroll_paid for lo_admin3.
+*lo_admin3->notify_employee( ).
+*out->write( lv_log ).
   ENDMETHOD.
 
 ENDCLASS.
