@@ -418,7 +418,7 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     out->write( lv_headquarters ).
 
-* Ejercicio 1 Eventos Definición - Levantamiento objeto - clase receptora
+* Ejercicio 1 - 2  Eventos Definición - Levantamiento objeto - clase receptora
 
     DATA: lo_screen_2   TYPE REF TO zcl_lab_42_antmu_screen,
           lo_navigation TYPE REF TO zcl_lab_43_antmu_navigation.
@@ -455,9 +455,9 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     SET HANDLER go_chrome->on_close_windows FOR go_operat_sistem ACTIVATION abap_false.
 
     go_operat_sistem->mouse_movement( ).
-*
+
     out->write( go_operat_sistem->log ).
-*
+
     out->write( go_chrome->log ).
 
 * Ejercicio 7  Eventos estáticos
