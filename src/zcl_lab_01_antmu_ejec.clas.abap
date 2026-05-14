@@ -465,52 +465,42 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 *    data(go_operator) = new zcl_lab_46_antmu_mob_operator(  ).
     SET HANDLER zcl_lab_47_antmu_custo_service=>on_new_call.
 
-    data: lv_telf1 type string vALUE '123456'.
-    zcl_lab_46_antmu_mob_operator=>assign_call( lv_telf1  ).
+    DATA: lv_telf1 TYPE string VALUE '123456'.
+    zcl_lab_46_antmu_mob_operator=>assign_call( lv_telf1 ).
     out->write( zcl_lab_47_antmu_custo_service=>lv_call ).
 
 * Ejercicio 8  All Instance
 
 
-data: lv_log type string.
+    DATA: lv_log TYPE string.
 
-data(go_admin1) = new zcl_lab_48_antmu_admin_dep( lv_log ).
-data(go_admin2) = new zcl_lab_48_antmu_admin_dep( lv_log ).
-data(go_admin3) = new zcl_lab_48_antmu_admin_dep( lv_log ).
+    DATA go_admin1 type ref TO zcl_lab_48_antmu_admin_dep.
+    DATA go_admin2 type ref to zcl_lab_48_antmu_admin_dep.
+    DATA go_admin3 type ref to zcl_lab_48_antmu_admin_dep.
 
-data(go_emp) = new zcl_lab_49_antmu_employee(   ).
+    DATA go_emp type ref to zcl_lab_49_antmu_employee.
+
+    go_emp = new #(  ).
+
+*    Registrar handler para todas las instancias
+    SET HANDLER go_emp->on_payroll_paid
+        FOR ALL INSTANCES.
 
 
-set hanDLER go_emp->on_payroll_paid for go_admin1.
-set hanDLER go_emp->on_payroll_paid for go_admin2.
-set hanDLER go_emp->on_payroll_paid for go_admin3.
+    go_admin1 = new #( i_emp_id = 'Employe_1' ).
+    go_emp->on_payroll_paid( ).
+    out->write( go_emp->lv_log ).
 
-go_admin1->employee_id = 'aaa'.
-* lv_log = 'EMP001'.
-" Crear instancias administrativas
-*CREATE OBJECT lo_admin1
-*  EXPORTING
-*    iv_employee_id = lv_log.
+    go_admin1 = new #( i_emp_id = 'Employe_2' ).
+    go_emp->on_payroll_paid( ).
+    out->write( go_emp->lv_log ).
 
-*set hanDLER lo_emp->on_payroll_paid for lo_admin1.
-*lo_admin1->notify_employee( ).
-*out->write( lv_log ).
-* lv_log = 'EMP002'.
-*CREATE OBJECT lo_admin2
-*  EXPORTING
-*    iv_employee_id = lv_log.
-*
-*set hanDLER lo_emp->on_payroll_paid for lo_admin2.
-*lo_admin2->notify_employee( ).
-*out->write( lv_log ).
-*
-* lv_log = 'EMP003'.
-*CREATE OBJECT lo_admin3
-*  EXPORTING
-*    iv_employee_id = lv_log.
-*set hanDLER lo_emp->on_payroll_paid for lo_admin3.
-*lo_admin3->notify_employee( ).
-*out->write( lv_log ).
+    go_admin1 = new #( i_emp_id = 'Employe_3' ).
+    go_emp->on_payroll_paid( ).
+    out->write( go_emp->lv_log ).
+
+
+
   ENDMETHOD.
 
 ENDCLASS.
