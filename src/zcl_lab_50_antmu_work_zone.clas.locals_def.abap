@@ -6,3 +6,16 @@ TYPES: BEGIN OF ty_work_zone,
          dashboard type string,
          spaces    type string,
         enD OF ty_work_zone.
+
+
+CLASS lcl_helper DEFINITION.
+
+  PUBLIC SECTION.
+
+    DATA: ms_work_zone TYPE ty_work_zone.
+
+    METHODS: get_work_zone
+      RETURNING VALUE(rs_work_zone) TYPE ty_work_zone.
+
+ENDCLASS.
+
