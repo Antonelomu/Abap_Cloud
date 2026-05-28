@@ -17,8 +17,10 @@ CLASS zcl_lab_51_antmu_wz_friend IMPLEMENTATION.
 
 
     DATA: lo_work_zone TYPE REF TO zcl_lab_50_antmu_work_zone.
-*          ls_wz        TYPE zcl_lab_50_antmu_work_zone->
     CREATE OBJECT lo_work_zone.
+
+    clear lo_work_zone->go_helper->ms_work_zone.
+    data(ls_work_zone) = lo_work_zone->go_helper->get_work_zone(  ).
 
   ENDMETHOD.
 
