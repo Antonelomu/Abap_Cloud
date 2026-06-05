@@ -2,7 +2,7 @@ CLASS zcl_lab_50_antmu_work_zone DEFINITION
   PUBLIC
   FINAL
   CREATE PUBLIC
-  gloBAL FRIENDS zcl_lab_51_antmu_wz_friend.
+  GLOBAL FRIENDS zcl_lab_51_antmu_wz_friend.
 
 
   PUBLIC SECTION.
@@ -26,7 +26,7 @@ CLASS zcl_lab_50_antmu_work_zone IMPLEMENTATION.
     me->gs_work_zone-dashboard = iv_dashboard.
     me->gs_work_zone-spaces    = iv_spaces.
 
-
   ENDMETHOD.
+
 
 ENDCLASS.

@@ -499,6 +499,23 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     go_emp->on_payroll_paid( ).
     out->write( go_emp->lv_log ).
 
+* Ejercicio 3 - Componentes Locales
+
+
+DATA: lo_work_zone TYPE REF TO zcl_lab_50_antmu_work_zone,
+      lo_friend    TYPE REF TO zcl_lab_51_antmu_wz_friend.
+
+
+      CREATE OBJECT lo_friend .
+
+
+      lo_friend->get_helper( ).
+
+
+
+
+
+
 
 
   ENDMETHOD.
