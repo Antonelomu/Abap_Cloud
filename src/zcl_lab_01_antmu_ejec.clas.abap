@@ -505,17 +505,10 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 DATA: lo_work_zone TYPE REF TO zcl_lab_50_antmu_work_zone,
       lo_friend    TYPE REF TO zcl_lab_51_antmu_wz_friend.
 
-
       CREATE OBJECT lo_friend .
-
-
       lo_friend->get_helper( ).
 
-
-
-
-
-
+* Ejercicio 4 - Estructura de control TRY-CATCH-ENDTRY
 
 
   ENDMETHOD.
