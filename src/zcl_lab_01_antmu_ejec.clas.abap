@@ -1,6 +1,6 @@
 
 CLASS zcl_lab_01_antmu_ejec DEFINITION
-* Pruebas Logali - Antonio Muñoz Moreno
+* Pruebas Logali - Antonio Muñoz Moreno.
   PUBLIC
   FINAL
   CREATE PUBLIC .
