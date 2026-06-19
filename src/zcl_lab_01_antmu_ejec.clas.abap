@@ -474,42 +474,64 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
     DATA: lv_log TYPE string.
 
-    DATA go_admin1 type ref TO zcl_lab_48_antmu_admin_dep.
-    DATA go_admin2 type ref to zcl_lab_48_antmu_admin_dep.
-    DATA go_admin3 type ref to zcl_lab_48_antmu_admin_dep.
+    DATA go_admin1 TYPE REF TO zcl_lab_48_antmu_admin_dep.
+    DATA go_admin2 TYPE REF TO zcl_lab_48_antmu_admin_dep.
+    DATA go_admin3 TYPE REF TO zcl_lab_48_antmu_admin_dep.
 
-    DATA go_emp type ref to zcl_lab_49_antmu_employee.
+    DATA go_emp TYPE REF TO zcl_lab_49_antmu_employee.
 
-    go_emp = new #(  ).
+    go_emp = NEW #(  ).
 
 *    Registrar handler para todas las instancias
     SET HANDLER go_emp->on_payroll_paid
         FOR ALL INSTANCES.
 
 
-    go_admin1 = new #( i_emp_id = 'Employe_1' ).
+    go_admin1 = NEW #( i_emp_id = 'Employe_1' ).
     go_emp->on_payroll_paid( ).
     out->write( go_emp->lv_log ).
 
-    go_admin1 = new #( i_emp_id = 'Employe_2' ).
+    go_admin1 = NEW #( i_emp_id = 'Employe_2' ).
     go_emp->on_payroll_paid( ).
     out->write( go_emp->lv_log ).
 
-    go_admin1 = new #( i_emp_id = 'Employe_3' ).
+    go_admin1 = NEW #( i_emp_id = 'Employe_3' ).
     go_emp->on_payroll_paid( ).
     out->write( go_emp->lv_log ).
 
 * Ejercicio 3 - Componentes Locales
 
 
-DATA: lo_work_zone TYPE REF TO zcl_lab_50_antmu_work_zone,
-      lo_friend    TYPE REF TO zcl_lab_51_antmu_wz_friend.
+*    DATA: lo_work_zone TYPE REF TO zcl_lab_50_antmu_work_zone,
+*          lo_friend    TYPE REF TO zcl_lab_51_antmu_wz_friend.
+*
+*    CREATE OBJECT lo_friend.
+*    lo_friend->get_helper( ).
 
-      CREATE OBJECT lo_friend .
-      lo_friend->get_helper( ).
+* Ejercicio 4 - 5 - Estructura de control TRY-CATCH-ENDTRY-RETRY
 
-* Ejercicio 4 - Estructura de control TRY-CATCH-ENDTRY
+    DATA(lo_check_user) =  NEW zcl_lab_53_antmu_check_user( ).
 
+    DATA: lv_result TYPE i,
+          lv_num1   TYPE i VALUE 10,
+          lv_num2   TYPE i.
+
+    TRY.
+*        lo_check_user->check_user( iv_user = sy-uname ).
+
+        lv_result = lv_num1 / lv_num2.
+
+      CATCH zcx_lab_antmu_52_operations INTO DATA(lx_check_user).
+        out->write( lx_check_user->get_text( ) ).
+
+      CATCH cx_sy_zerodivide INTO DATA(lx_zero_divide).
+        out->write( lx_zero_divide->get_text( ) ).
+        lv_num2 = 2.
+        RETRY.
+    ENDTRY.
+
+
+    out->write( |FINISH:{ lv_result }| ).
 
   ENDMETHOD.
 
