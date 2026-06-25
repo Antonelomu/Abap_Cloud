@@ -510,20 +510,47 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
 * Ejercicio 4 - 5 - Estructura de control TRY-CATCH-ENDTRY-RETRY
 
-    DATA(lo_check_user) =  NEW zcl_lab_53_antmu_check_user( ).
+*    DATA(lo_check_user) =  NEW zcl_lab_53_antmu_check_user( ).
+*
+*    DATA: lv_result TYPE i,
+*          lv_num1   TYPE i VALUE 10,
+*          lv_num2   TYPE i.
+*
+*    TRY.
+**        lo_check_user->check_user( iv_user = sy-uname ).
+*
+*        lv_result = lv_num1 / lv_num2.
+*
+*      CATCH zcx_lab_antmu_52_operations INTO DATA(lx_check_user).
+*        out->write( lx_check_user->get_text( ) ).
+*
+*      CATCH cx_sy_zerodivide INTO DATA(lx_zero_divide).
+*        out->write( lx_zero_divide->get_text( ) ).
+*        lv_num2 = 2.
+*        RETRY.
+*    ENDTRY.
+*
+*
+*    out->write( |FINISH:{ lv_result }| ).
+
+* Ejercicio 7 - Estructura de control CLANUP
+
+   DATA(lo_check_user) =  NEW zcl_lab_53_antmu_check_user( ).
 
     DATA: lv_result TYPE i,
           lv_num1   TYPE i VALUE 10,
           lv_num2   TYPE i.
 
     TRY.
-*        lo_check_user->check_user( iv_user = sy-uname ).
-
+       try.
         lv_result = lv_num1 / lv_num2.
 
       CATCH zcx_lab_antmu_52_operations INTO DATA(lx_check_user).
         out->write( lx_check_user->get_text( ) ).
 
+        cleANUP inTO data(lx_cleanup).
+        out->write( |CLEANUP:{ lx_cleanup->get_text(  ) }| ).
+      endTRY.
       CATCH cx_sy_zerodivide INTO DATA(lx_zero_divide).
         out->write( lx_zero_divide->get_text( ) ).
         lv_num2 = 2.
@@ -532,7 +559,6 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
 
     out->write( |FINISH:{ lv_result }| ).
-
   ENDMETHOD.
 
 ENDCLASS.
