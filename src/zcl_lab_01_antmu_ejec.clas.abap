@@ -559,6 +559,54 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
 
     out->write( |FINISH:{ lv_result }| ).
+
+* Ejercicio 8 - Implementación de excepciones reanudables
+
+
+    DATA: lo_bank TYPE REF TO zcl_lab_54_antmu_bank,
+          lv_log1 TYPE string.
+
+    CREATE OBJECT lo_bank.
+
+*Out->write( 'Casuística IBAN incorrecto' ).
+*TRY.
+*
+*    lo_bank->transfer(
+*      EXPORTING
+*        iv_iban   = 'ES95 4329 8765 4300'
+*        iv_amount = 500
+*        iv_saving_acount = abap_true
+*      CHANGING
+*        cv_log    = lv_log1
+*    ).
+*
+*
+*
+*  CATCH BEFORE UNWIND zcx_lab_55_antmu_auth_iban INTO DATA(lx_error).
+*
+*    out->write( lx_error->get_text( ) ).
+*
+*ENDTRY.
+
+    Out->write( 'Casuística IBAN correcto, saldo < 1000' ).
+    TRY.
+
+        lo_bank->transfer(
+          EXPORTING
+            iv_iban   = 'ES95 4329 8765 4321'
+            iv_amount = 500
+*            iv_saving_acount = abap_false
+          CHANGING
+            cv_log    = lv_log1
+        ).
+
+      CATCH BEFORE UNWIND zcx_lab_55_antmu_auth_iban INTO DATA(lx_error).
+
+        out->write( lx_error->get_text( ) ).
+
+    ENDTRY.
+
+    out->write( lv_log1 ).
   ENDMETHOD.
 
 ENDCLASS.
