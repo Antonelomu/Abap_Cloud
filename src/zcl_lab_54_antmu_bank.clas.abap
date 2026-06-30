@@ -25,7 +25,6 @@ CLASS zcl_lab_54_antmu_bank IMPLEMENTATION.
         EXPORTING
           textid = zcx_lab_55_antmu_auth_iban=>iban_correcto.
     ELSE.
-*      cv_log = |{ cv_log } ... IBAN INCORRECTO{ cl_abap_char_utilities=>newline }|.
       RAISE EXCEPTION TYPE zcx_lab_55_antmu_auth_iban
         EXPORTING
           textid = zcx_lab_55_antmu_auth_iban=>iban_incorrecto.
