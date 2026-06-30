@@ -24,13 +24,13 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_LAB_01_MESAGE</ARBGB>
      <MSGNR>003</MSGNR>
-     <TEXT>Saldo insuficiente</TEXT>
+     <TEXT>IBAN incorrecto</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
      <ARBGB>ZMC_LAB_01_MESAGE</ARBGB>
      <MSGNR>004</MSGNR>
-     <TEXT>IBAN incorrecto</TEXT>
+     <TEXT>IBAN correcto</TEXT>
     </T100>
    </T100>
   </asx:values>

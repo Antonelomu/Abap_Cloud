@@ -9,23 +9,24 @@ CLASS zcx_lab_55_antmu_auth_iban DEFINITION
     INTERFACES if_t100_dyn_msg .
 
     CONSTANTS:
-      BEGIN OF saldo_insuficiente,
+
+      BEGIN OF iban_incorrecto,
         msgid TYPE symsgid VALUE 'ZMC_LAB_01_MESAGE',
         msgno TYPE symsgno VALUE '003',
         attr1 TYPE scx_attrname VALUE 'mv_msgv1',
         attr2 TYPE scx_attrname VALUE 'mv_msgv2',
         attr3 TYPE scx_attrname VALUE 'mv_msgv3',
         attr4 TYPE scx_attrname VALUE 'mv_msgv4',
-      END OF saldo_insuficiente,
+      END OF iban_incorrecto,
 
-      BEGIN OF iban_incorrecto,
+      BEGIN OF iban_correcto,
         msgid TYPE symsgid VALUE 'ZMC_LAB_01_MESAGE',
         msgno TYPE symsgno VALUE '004',
         attr1 TYPE scx_attrname VALUE 'mv_msgv1',
         attr2 TYPE scx_attrname VALUE 'mv_msgv2',
         attr3 TYPE scx_attrname VALUE 'mv_msgv3',
         attr4 TYPE scx_attrname VALUE 'mv_msgv4',
-      END OF iban_incorrecto.
+      END OF iban_correcto.
 
     DATA: mv_msgv1 TYPE msgv1,
           mv_msgv2 TYPE msgv1,

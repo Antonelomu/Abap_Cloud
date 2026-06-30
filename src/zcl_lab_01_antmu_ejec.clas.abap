@@ -562,51 +562,61 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
 
 * Ejercicio 8 - Implementación de excepciones reanudables
 
+*  1er caso IBAN correcto
 
-    DATA: lo_bank TYPE REF TO zcl_lab_54_antmu_bank,
-          lv_log1 TYPE string.
+    DATA: lo_bank       TYPE REF TO zcl_lab_54_antmu_bank,
+          lv_log1       TYPE string,
+          gcx_excepcion TYPE REF TO zcx_lab_55_antmu_auth_iban.
 
     CREATE OBJECT lo_bank.
 
-*Out->write( 'Casuística IBAN incorrecto' ).
-*TRY.
-*
-*    lo_bank->transfer(
-*      EXPORTING
-*        iv_iban   = 'ES95 4329 8765 4300'
-*        iv_amount = 500
-*        iv_saving_acount = abap_true
-*      CHANGING
-*        cv_log    = lv_log1
-*    ).
-*
-*
-*
-*  CATCH BEFORE UNWIND zcx_lab_55_antmu_auth_iban INTO DATA(lx_error).
-*
-*    out->write( lx_error->get_text( ) ).
-*
-*ENDTRY.
-
-    Out->write( 'Casuística IBAN correcto, saldo < 1000' ).
     TRY.
 
         lo_bank->transfer(
           EXPORTING
-            iv_iban   = 'ES95 4329 8765 4321'
-            iv_amount = 500
-*            iv_saving_acount = abap_false
+            iv_iban = 'ES95 4329 8765 4321'
           CHANGING
-            cv_log    = lv_log1
+            cv_log  = lv_log1
         ).
 
-      CATCH BEFORE UNWIND zcx_lab_55_antmu_auth_iban INTO DATA(lx_error).
+        lv_log1 = |{ lv_log1 }...{ gcx_excepcion->get_text(  ) }|.
+        Out->write( lv_log1 ).
 
-        out->write( lx_error->get_text( ) ).
+      CATCH BEFORE UNWIND zcx_lab_55_antmu_auth_iban INTO gcx_excepcion.
 
+        IF gcx_excepcion->is_resumable EQ abap_true.
+          RESUME.
+        ELSE.
+          lv_log1 = |{ lv_log1 }...{ gcx_excepcion->get_text(  ) }|.
+          Out->write( lv_log1 ).
+        ENDIF.
     ENDTRY.
 
-    out->write( lv_log1 ).
+*  2er caso IBAN incorrecto
+    DATA: lv_log2        TYPE string.
+
+    CREATE OBJECT lo_bank.
+
+    TRY.
+        lo_bank->transfer(
+          EXPORTING
+            iv_iban = 'ES95 4329 8765 3333'
+          CHANGING
+            cv_log  = lv_log2
+        ).
+
+        lv_log2 = |{ lv_log2 }...{ gcx_excepcion->get_text(  ) }|.
+        Out->write( lv_log2 ).
+
+      CATCH BEFORE UNWIND zcx_lab_55_antmu_auth_iban INTO gcx_excepcion.
+
+        IF gcx_excepcion->is_resumable EQ abap_true.
+          RESUME.
+        ELSE.
+          lv_log2 = |{ lv_log2 }...{ gcx_excepcion->get_text(  ) }|.
+          Out->write( lv_log2 ).
+        ENDIF.
+    ENDTRY.
   ENDMETHOD.
 
 ENDCLASS.
