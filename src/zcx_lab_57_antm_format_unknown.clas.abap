@@ -1,0 +1,15 @@
+CLASS zcx_lab_57_antm_format_unknown DEFINITION
+  PUBLIC
+  INHERITING FROM cx_static_check
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcx_lab_57_antm_format_unknown IMPLEMENTATION.
+ENDCLASS.

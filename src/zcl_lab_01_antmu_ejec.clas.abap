@@ -617,6 +617,29 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
           Out->write( lv_log2 ).
         ENDIF.
     ENDTRY.
+
+* Ejercicio 9 - Asignación de excepciones unas a otras
+
+    DATA: lo_date_analyze    TYPE REF TO zcl_lab_58__antm_date_analyzer.
+
+    CREATE OBJECT lo_date_analyze.
+
+    TRY.
+        TRY.
+            lo_date_analyze->analyze_date( ).
+
+          CATCH zcx_lab_56_antmu_no_date INTO DATA(gcx_no_date).
+            lo_date_analyze->analyze_format( io_ANALYZE_FORMAT = gcx_no_date ).
+        ENDTRY.
+
+      CATCH  zcx_lab_57_antm_format_unknown INTO DATA(gcx_format_unknown).
+
+        out->write( |{ gcx_format_unknown->get_text(  ) }\n| ).
+
+        IF   gcx_format_unknown->previous IS BOUND.
+          out->write( gcx_format_unknown->previous->get_text(  ) ).
+        ENDIF.
+    ENDTRY.
   ENDMETHOD.
 
 ENDCLASS.
