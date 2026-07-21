@@ -1,14 +1,21 @@
-class ZCL_LAB_59_ANTMU_CALCULATOR definition
-  public
-  final
-  create public .
+CLASS zcl_lab_59_antmu_calculator DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
 
-public section.
-protected section.
-private section.
+  PUBLIC SECTION.
+    METHODS sum_up IMPORTING iv_num1          TYPE i
+                             iv_num2          TYPE i
+                   RETURNING VALUE(rv_result) TYPE i.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
 ENDCLASS.
 
 
 
-CLASS ZCL_LAB_59_ANTMU_CALCULATOR IMPLEMENTATION.
+CLASS zcl_lab_59_antmu_calculator IMPLEMENTATION.
+  METHOD sum_up.
+    rv_result = iv_num1 + iv_num2.
+  ENDMETHOD.
+
 ENDCLASS.
