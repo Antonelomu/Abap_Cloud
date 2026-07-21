@@ -1,14 +1,23 @@
-class ZCL_LAB_60_ANTMU_T_CALC definition
-  public
-  final
-  create public .
+CLASS zcl_lab_60_antmu_t_calc DEFINITION
+  PUBLIC
+  FINAL
+  FOR TESTING
+  DURATION SHORT
+  RISK LEVEL HARMLESS.
 
-public section.
-protected section.
-private section.
+
+  PUBLIC SECTION.
+   METHODS test_sum_up FOR TESTING.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+
 ENDCLASS.
 
 
 
-CLASS ZCL_LAB_60_ANTMU_T_CALC IMPLEMENTATION.
+CLASS zcl_lab_60_antmu_t_calc IMPLEMENTATION.
+  METHOD test_sum_up.
+
+  ENDMETHOD.
+
 ENDCLASS.
