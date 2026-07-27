@@ -1,17 +1,11 @@
-CLASS zcl_lab_60_antmu_t_calc DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC
-  FOR TESTING
+*"* use this source file for your ABAP unit test classes
+CLASS ltcl_Calculator DEFINITION FINAL FOR TESTING
   DURATION SHORT
   RISK LEVEL HARMLESS.
 
-
-  PUBLIC SECTION.
-    "! @testing zcl_lab_59_antmu_calculator
-    METHODS test_sum_up FOR TESTING. " UTM - Unit Test Method
-  PROTECTED SECTION.
   PRIVATE SECTION.
+    METHODS:
+      calculator_local_test FOR TESTING RAISING cx_static_check.
 
     CLASS-METHODS class_setup.
     CLASS-METHODS class_teardown.
@@ -23,14 +17,9 @@ CLASS zcl_lab_60_antmu_t_calc DEFINITION
 ENDCLASS.
 
 
+CLASS ltcl_calculator IMPLEMENTATION.
 
-CLASS zcl_lab_60_antmu_t_calc IMPLEMENTATION.
-
-  METHOD setup.
-    mo_cut = NEW zcl_lab_59_antmu_calculator(  ).
-  ENDMETHOD.
-
-  METHOD test_sum_up.
+  METHOD calculator_local_test.
 
     "Given
     DATA(lv_number_1) = 4.
@@ -47,19 +36,13 @@ CLASS zcl_lab_60_antmu_t_calc IMPLEMENTATION.
     ).
 
     "Then
-    cl_abap_unit_assert=>assert_equals(
+    IF cl_abap_unit_assert=>assert_equals(
       EXPORTING
         act                  = lv_result
-        exp                  = 10
+        exp                  = 10 ) EQ abap_true.
 
-    ).
-
-  ENDMETHOD.
-
-
-
-  METHOD teardown.
-    CLEAR mo_cut.
+      cl_abap_unit_assert=>fail( 'Calculator process failed' ).
+    ENDIF.
   ENDMETHOD.
 
   METHOD class_setup.
@@ -68,6 +51,14 @@ CLASS zcl_lab_60_antmu_t_calc IMPLEMENTATION.
 
   METHOD class_teardown.
 
+  ENDMETHOD.
+
+  METHOD setup.
+    mo_cut = NEW zcl_lab_59_antmu_calculator(  ).
+  ENDMETHOD.
+
+  METHOD teardown.
+    CLEAR mo_cut.
   ENDMETHOD.
 
 ENDCLASS.
