@@ -30,7 +30,7 @@ CLASS zcl_lab_61_antmu_travel IMPLEMENTATION.
     END-TEST-SEAM.
 
     IF lv_travel EQ '00000010'.
-      es_travel = CORRESPONDING #(  ls_travel ).
+      es_travel = CORRESPONDING #( ls_travel ).
     ENDIF.
   ENDMETHOD.
 

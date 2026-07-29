@@ -640,6 +640,41 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
           out->write( gcx_format_unknown->previous->get_text(  ) ).
         ENDIF.
     ENDTRY.
+
+* Ejercicio 6 - ABAP Unit Test - Test-Injection
+
+    DATA(lo_cut) = NEW zcl_lab_61_antmu_travel(  ).
+
+    lo_cut->get_travel(
+        IMPORTING
+          es_travel = DATA(ls_travel) ).
+
+    out->write( |{ ls_travel-travel_id }-{ ls_travel-agency_id }-{ ls_travel-customer_id  }| ).
+
+* Ejercicio 1 - Patrón de diseño SINGLETON
+
+
+    DATA: lo_context1 TYPE REF TO zcl_lab_62_antmu_context,
+          lo_context2 TYPE REF TO zcl_lab_62_antmu_context,
+          lv_text     TYPE string.
+
+    lo_context1 = zcl_lab_62_antmu_context=>get_instance( ).
+    lo_context2 = zcl_lab_62_antmu_context=>get_instance( ).
+
+    lo_context1->set_text( 'Primer patrón Singleton en ABAP' ).
+    lv_text = lo_context2->get_text( ).
+
+    out->write( lv_text  ).
+    out->write( lv_text  ).
+
+    out->write( cl_abap_char_utilities=>newline ).
+
+    lo_context1->set_text( 'Segundo patrón Singleton en ABAP' ).
+    lv_text = lo_context2->get_text( ).
+
+    out->write( lv_text  ).
+    out->write( lv_text  ).
+
   ENDMETHOD.
 
 ENDCLASS.
