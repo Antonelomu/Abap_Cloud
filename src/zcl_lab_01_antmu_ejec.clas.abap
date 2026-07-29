@@ -675,6 +675,20 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     out->write( lv_text  ).
     out->write( lv_text  ).
 
+* Ejercicio 2 - Patrón de diseño FACTORY METHOD
+
+    DATA: go_file    TYPE REF TO zif_lab_06_antmu_file,
+          go_factory TYPE REF TO zcl_lab_65_antmu_factory.
+
+    go_factory = new #(  ).
+
+    go_file = zcl_lab_65_antmu_factory=>create_file( 'WORK' ).
+    out->write( go_file->get_file_type( ) ).
+
+    go_file = zcl_lab_65_antmu_factory=>create_file( 'SUPPLY' ).
+     out->write( go_file->get_file_type( ) ).
+
+
   ENDMETHOD.
 
 ENDCLASS.
