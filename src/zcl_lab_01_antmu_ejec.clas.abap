@@ -688,6 +688,8 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     go_file = zcl_lab_65_antmu_factory=>create_file( 'SUPPLY' ).
      out->write( go_file->get_file_type( ) ).
 
+* Ejercicio 3 - Patrón de diseño TEMPLATE METHOD
+
 
   ENDMETHOD.
 
