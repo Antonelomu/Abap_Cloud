@@ -680,15 +680,32 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     DATA: go_file    TYPE REF TO zif_lab_06_antmu_file,
           go_factory TYPE REF TO zcl_lab_65_antmu_factory.
 
-    go_factory = new #(  ).
+    go_factory = NEW #(  ).
 
     go_file = zcl_lab_65_antmu_factory=>create_file( 'WORK' ).
     out->write( go_file->get_file_type( ) ).
 
     go_file = zcl_lab_65_antmu_factory=>create_file( 'SUPPLY' ).
-     out->write( go_file->get_file_type( ) ).
+    out->write( go_file->get_file_type( ) ).
 
 * Ejercicio 3 - Patrón de diseño TEMPLATE METHOD
+
+    DATA: lo_package_a TYPE REF TO zcl_lab_66_antmu_travel,
+          lo_package_b TYPE REF TO zcl_lab_66_antmu_travel.
+
+    CREATE OBJECT lo_package_a TYPE zcl_lab_67_antmu_package_a.
+
+    out->write( cl_abap_char_utilities=>newline ).
+    out->write( '***** PACKAGE A *****' ).
+    out->write( cl_abap_char_utilities=>newline ).
+    lo_package_a->travel( out ).
+
+    CREATE OBJECT lo_package_b TYPE zcl_lab_68_antmu_package_b.
+
+    out->write( cl_abap_char_utilities=>newline ).
+    out->write( '***** PACKAGE B *****' ).
+    out->write( cl_abap_char_utilities=>newline ).
+    lo_package_b->travel( out ).
 
 
   ENDMETHOD.

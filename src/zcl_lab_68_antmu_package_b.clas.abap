@@ -1,4 +1,4 @@
-CLASS zcl_lab_68_antmu_package_b DEFINITION ABSTRACT
+CLASS zcl_lab_68_antmu_package_b DEFINITION
   PUBLIC
   CREATE PUBLIC
   INHERITING FROM zcl_lab_66_antmu_travel.
@@ -17,22 +17,20 @@ ENDCLASS.
 
 CLASS zcl_lab_68_antmu_package_b IMPLEMENTATION.
 
-
-
-  METHOD day_one.
+  METHOD transport_oneway.
     out->write( 'PACKAGE B - Tren de ida' ).
   ENDMETHOD.
 
-  METHOD day_three.
-    out->write( 'PACKAGE B - Tour gastronomico' ).
+  METHOD day_one.
+    out->write( 'PACKAGE B - Compras y tiempo libre'  ).
   ENDMETHOD.
 
   METHOD day_two.
     out->write( 'PACKAGE B - Visita a museos' ).
   ENDMETHOD.
 
-  METHOD transport_oneway.
-    out->write( 'PACKAGE B - Compras y tiempo libre' ).
+  METHOD day_three.
+    out->write( 'PACKAGE B - Tour gastronomico' ).
   ENDMETHOD.
 
   METHOD transport_return.
