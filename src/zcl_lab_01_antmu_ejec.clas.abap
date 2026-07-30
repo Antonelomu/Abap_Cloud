@@ -707,6 +707,28 @@ CLASS zcl_lab_01_antmu_ejec IMPLEMENTATION.
     out->write( cl_abap_char_utilities=>newline ).
     lo_package_b->travel( out ).
 
+* Ejercicio 4 - Patrón de diseño OBSERVER
+
+    DATA: lo_blog  TYPE REF TO zcl_lab_69_antmu_blog,
+          lo_admin TYPE REF TO zcl_lab_71_antmu_administrator,
+          lo_users TYPE REF TO zcl_lab_72_antmu_users.
+
+    CREATE OBJECT lo_blog.
+    CREATE OBJECT lo_admin.
+    CREATE OBJECT lo_users.
+
+* Registrar observadores
+    SET HANDLER lo_admin->on_new_article FOR lo_blog.
+    SET HANDLER lo_users->on_new_article FOR lo_blog.
+    out->write( cl_abap_char_utilities=>newline ).
+
+* Publicar artículo
+    lo_blog->publish_article( iv_article = 'SAP lanza una nueva tecnología SAP NetWeaver Gateway' ).
+    out->write( cl_abap_char_utilities=>newline ).
+* Mostrar notificaciones
+    out->write( lo_admin->notification ).
+    out->write( cl_abap_char_utilities=>newline ).
+    out->write( lo_users->notification ).
 
   ENDMETHOD.
 
